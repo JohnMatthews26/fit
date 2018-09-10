@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+
   validates :username, presence: true, uniqueness: true
   validates :session_token, presence: true
   validates :password_digest, presence: true
@@ -30,13 +31,7 @@ class User < ApplicationRecord
     self.session_token
   end
 
-  def followed_user_ids
-    @followed_user_ids ||= out_follows.pluck(:followee_id)
-  end
 
-  def follows?(user)
-    followed_user_ids.include?(user.id)
-  end
 
   private
 
